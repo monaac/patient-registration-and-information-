@@ -1,0 +1,96 @@
+using System;
+
+namespace PatientRegistration
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Patient[] patients = new Patient[10];
+            int count = 0;
+
+            while (true)
+            {
+                Console.WriteLine("1. Register Patient");
+                Console.WriteLine("2. View Patient Information");
+                Console.WriteLine("3. Exit");
+                Console.Write("Enter your choice: ");
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        if (count < 10)
+                        {
+                            Console.Write("Enter name: ");
+                            string name = Console.ReadLine();
+
+                            Console.Write("Enter age: ");
+                            int age = Convert.ToInt32(Console.ReadLine());
+
+                            Console.Write("Enter address: ");
+                            string address = Console.ReadLine();
+
+                            Console.Write("Enter phone number: ");
+                            string phoneNumber = Console.ReadLine();
+
+                            patients[count] = new Patient(name, age, address, phoneNumber);
+                            count++;
+
+                            Console.WriteLine("Patient Registered Successfully!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Patient Registration Full!");
+                        }
+                        break;
+
+                    case 2:
+                        Console.Write("Enter patient name: ");
+                        string searchName = Console.ReadLine();
+
+                        bool found = false;
+                        for (int i = 0; i < count; i++)
+                        {
+                            if (patients[i].Name == searchName)
+                            {
+                                Console.WriteLine("Name: " + patients[i].Name);
+                                Console.WriteLine("Age: " + patients[i].Age);
+                                Console.WriteLine("Address: " + patients[i].Address);
+                                Console.WriteLine("Phone Number: " + patients[i].PhoneNumber);
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found)
+                        {
+                            Console.WriteLine("Patient Not Found!");
+                        }
+                        break;
+
+                    case 3:
+                        return;
+                }
+
+                Console.WriteLine();
+            }
+        }
+    }
+
+    class Patient
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public Patient(string name, int age, string address, string phoneNumber)
+        {
+            Name = name;
+            Age = age;
+            Address = address;
+            PhoneNumber = phoneNumber;
+        }
+    }
+}
